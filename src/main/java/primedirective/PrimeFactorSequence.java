@@ -27,7 +27,24 @@ public class PrimeFactorSequence {
      */
     public List<Integer> primeFactorSequence() {
         List<Integer> seq = new ArrayList<>();
-        // TODO: Implement this method
+        seq.add(0); seq.add(0);
+
+        for(int i = 2; i <= upperBound; i++) {
+            int num = i, count = 0;
+            List<Integer> primes = Primes.getPrimes(i);
+
+            while(num > 1) {
+                for(Integer prime : primes) {
+                    if((double) num / prime % 1.0 == 0.0) {
+                        num /= prime;
+                        count++;
+                    }
+                }
+            }
+
+            seq.add(count);
+        }
+
         return seq;
     }
 
@@ -41,7 +58,20 @@ public class PrimeFactorSequence {
      */
     public List<Integer> numbersWithMPrimeFactors(int m) {
         List<Integer> seq = new ArrayList<>();
-        // TODO: Implement this method
+        PrimeFactorSequence pfs = new PrimeFactorSequence(10000);
+        List<Integer> sequence = pfs.primeFactorSequence();
+        int max = 0;
+
+        for(int i = 0; i <= upperBound; i++) {
+            int curr = 1;
+
+            if(sequence.get(i) == m) {
+                seq.add(i);
+            }
+
+            max = Math.max(curr, max);
+        }
+
         return seq;
     }
 
